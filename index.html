@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    <title>Finna api demo</title>
+    <meta name="description" content="Finna api demo">
+    <meta name="author" content="Juha Luoma">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+    </head>
+
+    <body>
+        <div hidden>
+            <div class="record-modal" id="modal-original">
+                <div class="modal-title"></div>
+                <a target="_blank" class="modal-link" href="#">
+                    <img class="modal-image" source="" alt="">
+                </a>
+                <div class="modal-buildings">
+                    <div class="modal-buildings-header">Buildings:</div>
+                </div>
+                <div class="modal-authors">
+                    <div class="modal-authors-header">Authors:</div>
+                </div>
+                <div class="modal-subjects">
+                    <div class="modal-subjects-header">Subjects:</div>
+                </div>
+                <div class="modal-rights"></div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <div class="container">
+            <div class="row header-row">
+                <div class="col">
+                    <h1>FINNA API DEMO</h1>
+                </div>
+            </div>
+            <div class="row search-row">
+                <div class="col">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" name="url-input" id="search-field" class="form-control url-holder" value="https://api.finna.fi/v1/search?limit=20&filter[]=~sector_str_mv:&quot;0/mus/&quot;&filter[]=~usage_rights_str_mv:&quot;usage_D&quot;&type=AllFields&lookfor=&quot;taide&quot;">
+                            <div class="input-group-append" id="button-addon4">
+                                <button type="button" class="try-button btn btn-secondary">Go</button>
+                            </div>
+                        </div>
+                        <p>Search api for "Can modify, not for commercial use" images from museum sectors. Search word is taide. You can modify the search url for your liking.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row demo-row">
+                <div class="col">
+                    <h2>Search:</h2>
+                    <div class="area-demo">
+                        <div class="paginator-area">
+                            <span class="image-index"></span>
+                        </div>
+                        <div class="result-area" id="results-holder">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="sticky-wrapper">
+                        <h2>Record:</h2>
+                        <div class="area-demo record-area" id="record-holder">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            initButtons();
+        </script>
+    </body>
+</html>
