@@ -15,12 +15,19 @@ function initButtons() {
     });
 }
 
-function subjectSearch(e)
+function subjectSearch(e, resetPage)
 {
     e.preventDefault();
     var url = $(this).attr('href');
     resultArea = $('#results-holder');
     resultArea.empty();
+    if (typeof resetPage !== 'undefined' && resetPage) {
+        currentPage = 0;
+    }
+    var page = $(this).data('page');
+    if (typeof page !== 'undefined') {
+        currentPage = +page;
+    }
     $('.url-holder').val(url);
     console.log($(this).attr('href'));
     $.ajax({
@@ -30,8 +37,30 @@ function subjectSearch(e)
     });
 }
 
+var currentPage = 0;
+
+function setPaginator(count)
+{
+    var pages = [];
+    var start = (currentPage - 2 < 1) ? 1 : currentPage - 2;
+    var end = start + 4;
+    var paginatorButtons = $('.paginator-buttons');
+    paginatorButtons.empty();
+    for (var i = start; i <= end; i++) {
+        var link = $('<a class="paginator-button" href="#">' + i + '</a>');
+        var url = $('.url-holder').val();
+        url += '&page=' + i;
+        link.attr('href', url);
+        link.data('page', i);
+        link.on('click', subjectSearch);
+        paginatorButtons.append(link);
+    }
+}
+
 function parseData(response) {
     if (response.status === 'OK' && typeof response.records !== 'undefined') {
+        console.log(response);
+        setPaginator(response.count);
         response.records.forEach(function createRecordElement(record) {
             console.log(record);
             var modalCopy = $('#modal-original').clone();

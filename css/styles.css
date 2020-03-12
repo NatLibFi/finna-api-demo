@@ -27,6 +27,14 @@ body {
     margin: 6px 0 0 0;
 }
 
+.paginator-button {
+    color: black;
+    border: 1px solid rgba(114,57,129,.95);
+    border-radius: 2px;
+    padding: 2px;
+    margin: 0 2px;
+}
+
 .modal-image {
     max-width: 400px;
     max-height: 400px;
