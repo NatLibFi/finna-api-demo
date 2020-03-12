@@ -1,7 +1,3 @@
-function onButtonClicked() {
-    
-}
-
 var resultArea;
 
 function initButtons() {
@@ -61,8 +57,15 @@ function parseData(response) {
 
             if (typeof record.buildings !== 'undefined' && record.buildings.length > 0) {
                 var buildingsArea = modalCopy.find('.modal-buildings');
+                var buildingsList = buildingsArea.find('.buildings-list');
                 record.buildings.forEach(function parseBuildings(building) {
-                    
+                    var currentBuilding = $('<li/>');
+                    var url = "https://api.finna.fi/v1/search?limit=20&filter[]=~sector_str_mv:\"0/mus/\"&filter[]=~usage_rights_str_mv:\"usage_D\"&filter%5B%5D=~building%3A\"" + building.value + "\"&lookfor=\"\"";
+                    var link = $('<a href="' + url + '">' + building.translated + '</a>');
+                    link.attr('href', url);
+                    link.on('click', subjectSearch);
+                    currentBuilding.append(link);
+                    buildingsList.append(currentBuilding);
                 });
                 buildingsArea.show();
             }
@@ -75,13 +78,18 @@ function parseData(response) {
 
             if (typeof record.nonPresenterAuthors !== 'undefined' && record.nonPresenterAuthors.length > 0) {
                 var area = modalCopy.find('.modal-authors');
+                var authorsList = area.find('.authors-list');
                 record.nonPresenterAuthors.forEach(function parseAuthors(author) {
-                    var currentAuthor = $('<div/>');
-                    currentAuthor.append('<span>' + author.name + '</span> ');
+                    var currentAuthor = $('<li/>');
+                    var url = "https://api.finna.fi/v1/search?limit=20&filter[]=~sector_str_mv:\"0/mus/\"&filter[]=~usage_rights_str_mv:\"usage_D\"&type=author&lookfor=\"" + author.name + "\"";
+                    var link = $('<a href="' + url + '">' + author.name + '</a>');
+                    link.attr('href', url);
+                    link.on('click', subjectSearch);
+                    currentAuthor.append(link);
                     if (typeof author.role !== 'undefined') {
-                        currentAuthor.append('<span><small class="modal-author-role">' + author.role + '</small></span>');
+                        currentAuthor.append('<small class="modal-author-role">' + author.role + '</small>');
                     }
-                    area.append(currentAuthor);
+                    authorsList.append(currentAuthor);
                 });
                 area.show();
             }
