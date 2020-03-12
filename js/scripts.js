@@ -60,7 +60,7 @@ function parseData(response) {
                 var buildingsList = buildingsArea.find('.buildings-list');
                 record.buildings.forEach(function parseBuildings(building) {
                     var currentBuilding = $('<li/>');
-                    var url = "https://api.finna.fi/v1/search?limit=20&filter[]=~sector_str_mv:\"0/mus/\"&filter[]=~usage_rights_str_mv:\"usage_D\"&filter%5B%5D=~building%3A\"" + building.value + "\"&lookfor=\"\"";
+                    var url = "https://api.finna.fi/v1/search?limit=20&filter[]=~sector_str_mv:\"0/mus/\"&filter[]=~usage_rights_str_mv:\"usage_D\"&filter[]=~building%3A\"" + building.value + "\"&lookfor=\"\"";
                     var link = $('<a href="' + url + '">' + building.translated + '</a>');
                     link.attr('href', url);
                     link.on('click', subjectSearch);
